@@ -1,0 +1,5 @@
+# Download configuration for hgnc-ingest
+
+downloads:
+  - url: "http://storage.googleapis.com/public-download-files/hgnc/tsv/tsv/hgnc_complete_set.txt"
+    local_name: "data/hgnc_complete_set.txt"

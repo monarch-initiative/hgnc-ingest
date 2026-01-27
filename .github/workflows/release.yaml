@@ -53,7 +53,7 @@ jobs:
           if [ -n "${{ inputs.tag }}" ]; then
             echo "tag=${{ inputs.tag }}" >> $GITHUB_OUTPUT
           else
-            echo "tag=v$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+            echo "tag=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
           fi
 
       - name: Create Release

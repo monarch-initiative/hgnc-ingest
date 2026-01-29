@@ -17,6 +17,7 @@ dynamic = ["version"]
 dependencies = [
   "koza>=0.6.0",
   "biolink-model>=4.0.0",
+  "kghub-downloader>=0.3.0",
 ]
 
 [dependency-groups]

@@ -25,9 +25,17 @@ install:
 download: install
     uv run downloader download.yaml
 
+# Preprocess downloaded data
+[group('ingest')]
+preprocess: download
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if command -v gzcat > /dev/null 2>&1; then ZCAT=gzcat; else ZCAT=zcat; fi
+    $ZCAT data/BGI_HUMAN.json.gz | jq -r '.data[] | "\(.basicGeneticEntity.primaryId)\t\(.soTermId)"' > data/hgnc_so_terms.tsv
+
 # Run all transforms
 [group('ingest')]
-transform-all: download
+transform-all: preprocess
     #!/usr/bin/env bash
     set -euo pipefail
     for t in {{TRANSFORMS}}; do

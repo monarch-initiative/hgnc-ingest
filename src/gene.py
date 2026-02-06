@@ -27,11 +27,18 @@ def transform_record(koza_transform, row):
     in_taxon = "NCBITaxon:9606"
     in_taxon_label = "Homo sapiens"
 
+    so_term = None
+    if koza_transform:
+        so_term_id = koza_transform.lookup(row["hgnc_id"], 'so_term_id', 'hgnc_so_terms')
+        if so_term_id and so_term_id.startswith('SO:'):
+            so_term = [so_term_id]
+
     gene = Gene(
         id=row["hgnc_id"],
         symbol=row["symbol"],
         name=row["symbol"],
         full_name=row["name"],
+        type=so_term,
         xref=xref_list if xref_list else None,
         synonym=synonyms_list if synonyms_list else None,
         in_taxon=[in_taxon],

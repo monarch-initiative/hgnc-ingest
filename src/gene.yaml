@@ -62,6 +62,10 @@ reader:
     - mane_select
     - gencc
 
+transform:
+  mappings:
+    - 'hgnc_so_terms.yaml'
+
 writer:
   node_properties:
     - 'id'
@@ -69,6 +73,7 @@ writer:
     - 'name'
     - 'symbol'
     - 'full_name'
+    - 'type'
     - 'in_taxon'
     - 'in_taxon_label'
     - 'xref'

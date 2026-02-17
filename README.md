@@ -1,4 +1,4 @@
-# hgnc-ingest
+# HGNC
 
 The HGNC (HUGO Gene Nomenclature Committee) is responsible for approving unique symbols and names for human loci, including protein coding genes, ncRNA genes and pseudogenes, to allow unambiguous scientific communication.
 
@@ -27,40 +27,6 @@ SO terms to populate the type are taken from the Alliance genome HGNC BGI files,
     - in_taxon (`["NCBITaxon:9606"]`)
     - provided_by (`["infores:hgnc"]`)
     - type (`["SO:0001217"]`)
-
-## Setup
-
-```bash
-just setup
-```
-
-## Usage
-
-### Download source data
-
-```bash
-just download
-```
-
-### Run transforms
-
-```bash
-# Run all transforms
-just transform-all
-
-# Run specific transform
-just transform <transform_name>
-```
-
-### Run tests
-
-```bash
-just test
-```
-
-## Adding New Ingests
-
-Use the `create-koza-ingest` Claude skill to add new ingests to this repository.
 
 ## Citation
 

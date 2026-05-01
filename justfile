@@ -45,9 +45,14 @@ transform-all: preprocess
         fi
     done
 
-# Run full pipeline: install, download, transform, test
+# Postprocess: emit RDF (N-Triples) artifact via KGX
 [group('ingest')]
-run: transform-all test
+postprocess:
+    uv run kgx transform -i tsv -f nt -d gz -o output/hgnc_gene.nt.gz output/hgnc_gene_nodes.tsv
+
+# Run full pipeline: install, download, transform, postprocess, test
+[group('ingest')]
+run: transform-all postprocess test
 
 # Run specific transform
 [group('ingest')]

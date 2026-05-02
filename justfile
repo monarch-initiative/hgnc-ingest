@@ -50,9 +50,14 @@ transform-all: preprocess
 postprocess:
     uv run kgx transform -i tsv -f nt -d gz -o output/hgnc_gene.nt.gz output/hgnc_gene_nodes.tsv
 
-# Run full pipeline: install, download, transform, postprocess, test
+# Emit output/release-metadata.yaml describing this build's upstream sources and artifacts
 [group('ingest')]
-run: transform-all postprocess test
+metadata:
+    uv run python scripts/write_metadata.py
+
+# Run full pipeline: install, download, transform, postprocess, metadata, test
+[group('ingest')]
+run: test transform-all postprocess metadata
 
 # Run specific transform
 [group('ingest')]

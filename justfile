@@ -45,14 +45,19 @@ transform-all: preprocess
         fi
     done
 
+# Postprocess: emit RDF (N-Triples) artifact via KGX
+[group('ingest')]
+postprocess:
+    uv run kgx transform -i tsv -f nt -d gz -o output/hgnc_gene.nt.gz output/hgnc_gene_nodes.tsv
+
 # Emit output/release-metadata.yaml describing this build's upstream sources and artifacts
 [group('ingest')]
 metadata:
     uv run python scripts/write_metadata.py
 
-# Run full pipeline: install, download, transform, metadata, test
+# Run full pipeline: install, download, transform, postprocess, metadata, test
 [group('ingest')]
-run: test transform-all metadata
+run: test transform-all postprocess metadata
 
 # Run specific transform
 [group('ingest')]
